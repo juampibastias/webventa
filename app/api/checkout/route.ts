@@ -8,6 +8,15 @@ import { pricing, site } from "@/lib/content";
 // Requiere la variable de entorno MP_ACCESS_TOKEN (ver .env.example).
 // Como Integrador Oficial podés usar tu propio Access Token de producción.
 
+// Limpia el token de BOM, comillas y espacios accidentales al pegarlo.
+function cleanToken(raw: string | undefined): string {
+  if (!raw) return "";
+  return raw
+    .replace(/^﻿/, "") // BOM al inicio
+    .replace(/^["']|["']$/g, "") // comillas envolventes
+    .trim();
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { planId } = await req.json();
@@ -20,7 +29,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const accessToken = process.env.MP_ACCESS_TOKEN?.replace(/^﻿/, "").trim();
+    const accessToken = cleanToken(process.env.MP_ACCESS_TOKEN);
     if (!accessToken) {
       return NextResponse.json(
         { error: "Falta configurar MP_ACCESS_TOKEN en el servidor." },
@@ -28,10 +37,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const origin =
-      req.headers.get("origin") ??
-      process.env.NEXT_PUBLIC_SITE_URL ??
-      site.url;
+    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? site.url).replace(/\/$/, "");
 
     const client = new MercadoPagoConfig({ accessToken });
     const preference = new Preference(client);
@@ -49,9 +55,9 @@ export async function POST(req: NextRequest) {
           },
         ],
         back_urls: {
-          success: `${origin}/gracias?status=success`,
-          failure: `${origin}/gracias?status=failure`,
-          pending: `${origin}/gracias?status=pending`,
+          success: `${siteUrl}/gracias?status=success`,
+          failure: `${siteUrl}/gracias?status=failure`,
+          pending: `${siteUrl}/gracias?status=pending`,
         },
         auto_return: "approved",
         statement_descriptor: site.name.toUpperCase().slice(0, 22),
