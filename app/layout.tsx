@@ -17,16 +17,18 @@ export const metadata: Metadata = {
   },
   description: site.description,
   keywords: [
-    "desarrollo web San Juan Argentina",
-    "diseño web San Juan",
-    "programador freelance Argentina",
-    "aplicaciones a medida LATAM",
+    "desarrollo web",
+    "diseño web",
     "desarrollo web freelance",
+    "programador full stack",
+    "aplicaciones web a medida",
+    "desarrollo Next.js",
+    "aplicaciones a medida LATAM",
     "e-commerce Mercado Pago",
     "implementación de IA empresas",
-    "software a medida Argentina",
-    "Next.js developer Argentina",
-    "landing page profesional Argentina",
+    "software a medida",
+    "Next.js developer",
+    "landing page profesional",
   ],
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
@@ -40,6 +42,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} — ${site.tagline}`,
     description: site.description,
+  },
+  verification: {
+    google: "Z9-ol2qNH4Q2gXNj_WXpkABfh_UtOvQbZ140vuKtKx8",
   },
 };
 
