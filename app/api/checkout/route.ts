@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const accessToken = process.env.MP_ACCESS_TOKEN;
+    const accessToken = process.env.MP_ACCESS_TOKEN?.replace(/^﻿/, "").trim();
     if (!accessToken) {
       return NextResponse.json(
         { error: "Falta configurar MP_ACCESS_TOKEN en el servidor." },
