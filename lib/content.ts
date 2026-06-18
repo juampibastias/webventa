@@ -16,7 +16,7 @@ export const site = {
   // Página de reservas de Google Calendar (Citas). Crea el link de Google Meet
   // automáticamente en cada turno agendado. Generala en Google Calendar →
   // "Crear" → "Programación de citas" → "Compartir" → copiá el link público.
-  meetUrl: "https://calendar.app.google/TU-LINK-DE-CITAS",
+  meetUrl: "https://calendly.com/juanpedrobastiastorresi/30min",
   location: "LATAM · 100% remoto",
   currency: "ARS", // moneda para los pagos de Mercado Pago
 };
