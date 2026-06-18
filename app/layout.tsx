@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { site } from "@/lib/content";
+
+const GA_ID = "G-92J5QGDQ16";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -79,6 +82,13 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-ink text-slate-200 selection:bg-brand-500">
         {children}
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="ga-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}</Script>
       </body>
     </html>
   );
