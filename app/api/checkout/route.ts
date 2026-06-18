@@ -37,7 +37,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL ?? site.url).replace(/\/$/, "");
+    const rawUrl = process.env.NEXT_PUBLIC_SITE_URL || site.url;
+    const siteUrl = rawUrl.replace(/^﻿/, "").trim().replace(/\/$/, "");
 
     const client = new MercadoPagoConfig({ accessToken });
     const preference = new Preference(client);
