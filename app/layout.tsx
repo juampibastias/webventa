@@ -17,13 +17,16 @@ export const metadata: Metadata = {
   },
   description: site.description,
   keywords: [
-    "desarrollo web",
-    "diseño web",
-    "aplicaciones a medida",
-    "Next.js",
-    "e-commerce",
-    "implementación de IA",
-    "software para empresas",
+    "desarrollo web San Juan Argentina",
+    "diseño web San Juan",
+    "programador freelance Argentina",
+    "aplicaciones a medida LATAM",
+    "desarrollo web freelance",
+    "e-commerce Mercado Pago",
+    "implementación de IA empresas",
+    "software a medida Argentina",
+    "Next.js developer Argentina",
+    "landing page profesional Argentina",
   ],
   openGraph: {
     title: `${site.name} — ${site.tagline}`,
@@ -40,6 +43,22 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: site.fullName,
+  url: site.url,
+  email: site.email,
+  telephone: site.phone,
+  description: site.description,
+  areaServed: ["AR", "UY", "CL", "MX", "CO", "PE"],
+  knowsAbout: ["Desarrollo web", "Next.js", "E-commerce", "Inteligencia Artificial", "Mercado Pago"],
+  sameAs: [
+    "https://www.linkedin.com/in/juanpedrobastiastorresi",
+    "https://github.com/juampibastias",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -47,6 +66,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={inter.variable}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="font-sans antialiased bg-ink text-slate-200 selection:bg-brand-500">
         {children}
       </body>
