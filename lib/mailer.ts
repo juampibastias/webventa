@@ -37,6 +37,40 @@ export async function sendOwnerNotification(info: PaymentInfo) {
   });
 }
 
+export async function sendCheckoutInitiated(planName: string) {
+  await transporter.sendMail({
+    from: `"JPBT Notificaciones" <${process.env.GMAIL_USER}>`,
+    to: process.env.GMAIL_USER,
+    subject: `👀 Alguien inició un pago — Plan ${planName}`,
+    html: `
+      <h2>Intento de pago iniciado</h2>
+      <p>Alguien hizo click en "Pagar" y fue redirigido al checkout de Mercado Pago.</p>
+      <p><b>Plan:</b> ${planName}</p>
+      <p>Si no llega un email de pago aprobado en los próximos minutos, probablemente abandonó el proceso.</p>
+    `,
+  });
+}
+
+export async function sendPaymentRejected(info: PaymentInfo) {
+  await transporter.sendMail({
+    from: `"JPBT Notificaciones" <${process.env.GMAIL_USER}>`,
+    to: process.env.GMAIL_USER,
+    subject: `❌ Pago rechazado — Plan ${info.planName}`,
+    html: `
+      <h2>Intento de pago rechazado</h2>
+      <p>Alguien intentó pagar pero el pago fue rechazado por Mercado Pago.</p>
+      <table>
+        <tr><td><b>Comprador:</b></td><td>${info.buyerName}</td></tr>
+        <tr><td><b>Email:</b></td><td>${info.buyerEmail}</td></tr>
+        <tr><td><b>Plan:</b></td><td>${info.planName}</td></tr>
+        <tr><td><b>Monto:</b></td><td>$${info.amount.toLocaleString("es-AR")}</td></tr>
+        <tr><td><b>ID de pago:</b></td><td>${info.paymentId}</td></tr>
+      </table>
+      <p>Podés contactarlo para ayudarlo a completar el pago.</p>
+    `,
+  });
+}
+
 export async function sendBuyerConfirmation(info: PaymentInfo) {
   await transporter.sendMail({
     from: `"Juan Pedro Bastias" <${process.env.GMAIL_USER}>`,

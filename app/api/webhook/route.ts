@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendOwnerNotification, sendBuyerConfirmation } from "@/lib/mailer";
+import { sendOwnerNotification, sendBuyerConfirmation, sendPaymentRejected } from "@/lib/mailer";
 import { pricing } from "@/lib/content";
 
 function cleanEnv(raw: string | undefined): string {
@@ -28,9 +28,6 @@ export async function POST(req: NextRequest) {
 
     const payment = await mpRes.json();
 
-    // Solo procesar pagos aprobados
-    if (payment.status !== "approved") return NextResponse.json({ ok: true });
-
     const planId = payment.metadata?.plan_id as string | undefined;
     const plan = pricing.plans.find((p) => p.id === planId);
 
@@ -44,10 +41,14 @@ export async function POST(req: NextRequest) {
       paymentId,
     };
 
-    await Promise.all([
-      sendOwnerNotification(info),
-      info.buyerEmail ? sendBuyerConfirmation(info) : Promise.resolve(),
-    ]);
+    if (payment.status === "approved") {
+      await Promise.all([
+        sendOwnerNotification(info),
+        info.buyerEmail ? sendBuyerConfirmation(info) : Promise.resolve(),
+      ]);
+    } else if (payment.status === "rejected") {
+      await sendPaymentRejected(info);
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

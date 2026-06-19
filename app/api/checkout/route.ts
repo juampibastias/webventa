@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { pricing, site } from "@/lib/content";
+import { sendCheckoutInitiated } from "@/lib/mailer";
 
 function cleanEnv(raw: string | undefined): string {
   if (!raw) return "";
@@ -68,6 +69,9 @@ export async function POST(req: NextRequest) {
         { status: 500 }
       );
     }
+
+    // Fire-and-forget — no bloqueamos la respuesta al usuario
+    sendCheckoutInitiated(plan.name).catch(() => {});
 
     return NextResponse.json({ id: data.id, init_point: data.init_point });
   } catch (err) {
