@@ -1,12 +1,16 @@
 import nodemailer from "nodemailer";
 
+function clean(s: string | undefined) {
+  return (s ?? "").replace(/^﻿/, "").trim();
+}
+
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
   auth: {
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_APP_PASSWORD,
+    user: clean(process.env.GMAIL_USER),
+    pass: clean(process.env.GMAIL_APP_PASSWORD),
   },
 });
 
