@@ -12,13 +12,26 @@ export default function Contact() {
     service: "Sitio web / Landing",
     message: "",
   });
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
 
-  // Sin backend: el envío arma un mensaje de WhatsApp.
-  // Conectá tu propio endpoint o servicio (Formspree, Resend, etc.) si preferís email.
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const text = `Hola ${site.name}! Soy ${form.name}.%0A%0AServicio: ${form.service}%0AEmail: ${form.email}%0A%0A${form.message}`;
-    window.open(`https://wa.me/${site.whatsapp}?text=${text}`, "_blank");
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        setForm({ name: "", email: "", service: "Sitio web / Landing", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   const field =
@@ -134,13 +147,21 @@ export default function Contact() {
                 />
                 <button
                   type="submit"
-                  className="w-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600 px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-600/30 transition-transform hover:scale-[1.02]"
+                  disabled={status === "sending" || status === "ok"}
+                  className="w-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600 px-6 py-3.5 font-medium text-white shadow-lg shadow-brand-600/30 transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  {finalCta.cta}
+                  {status === "sending" ? "Enviando..." : status === "ok" ? "¡Mensaje enviado! ✓" : finalCta.cta}
                 </button>
-                <p className="text-center text-xs text-slate-500">
-                  Respondemos en menos de 24 horas hábiles.
-                </p>
+                {status === "error" && (
+                  <p className="text-center text-sm text-red-400">
+                    No se pudo enviar. Escribinos por WhatsApp.
+                  </p>
+                )}
+                {status === "idle" && (
+                  <p className="text-center text-xs text-slate-500">
+                    Respondemos en menos de 24 horas hábiles.
+                  </p>
+                )}
               </form>
             </Reveal>
           </div>
