@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { projects } from "@/lib/content";
 import Reveal from "./Reveal";
 
@@ -20,33 +21,46 @@ export default function Projects() {
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-gradient-border group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1"
+                className="card-gradient-border group flex h-full flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-white">{p.client}</h3>
-                    <p className="mt-0.5 text-sm text-brand-300">{p.category}</p>
-                  </div>
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 text-slate-300 transition-colors group-hover:border-brand-400/50 group-hover:text-white">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
+                <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10 bg-slate-900">
+                  <Image
+                    src={p.image}
+                    alt={`Captura de la plataforma ${p.client}`}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    priority={i < 2}
+                  />
                 </div>
 
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-400">
-                  {p.description}
-                </p>
-
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {p.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300"
-                    >
-                      {tag}
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">{p.client}</h3>
+                      <p className="mt-0.5 text-sm text-brand-300">{p.category}</p>
+                    </div>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/10 text-slate-300 transition-colors group-hover:border-brand-400/50 group-hover:text-white">
+                      <svg viewBox="0 0 24 24" className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth={2}>
+                        <path d="M7 17L17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
                     </span>
-                  ))}
+                  </div>
+
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-slate-400">
+                    {p.description}
+                  </p>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {p.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </a>
             </Reveal>

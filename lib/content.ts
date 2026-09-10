@@ -9,7 +9,7 @@ export const site = {
   tagline: "Construimos el software que tu negocio necesita para crecer",
   description:
     "Desarrollo web y software a medida. Sitios, e-commerce, aplicaciones y soluciones con IA que generan resultados medibles. Integrador Oficial de Mercado Pago.",
-  url: "https://jpbt.vercel.app",
+  url: "https://jpbt.online",
   email: "juanpedrobastiastorresi@gmail.com",
   phone: "+54 9 2634 53-8584",
   whatsapp: "5492634538584", // sin + ni espacios, para el link de wa.me
@@ -270,48 +270,53 @@ export const pricing = {
 export type Project = {
   client: string;
   url: string;
+  image: string;
   category: string;
   description: string;
   tags: string[];
 };
 
 export const projects = {
-  title: "Proyectos reales, clientes conformes",
+  title: "Plataformas propias, en producción",
   subtitle:
-    "Una muestra de plataformas en producción que diseñé y desarrollé de punta a punta.",
-  cta: "Ver sitio",
+    "Productos SaaS que diseñé, desarrollé y opero de punta a punta. Todos cobrando en pesos con Mercado Pago.",
+  cta: "Ver plataforma",
   items: [
     {
-      client: "Cooperativa Popular",
-      url: "https://www.cooperativapopular.com.ar/",
-      category: "Web institucional + Portal de pagos + IA",
+      client: "TeamApp",
+      url: "https://teamapp.online",
+      image: "/projects/teamapp.jpg",
+      category: "SaaS para equipos de running",
       description:
-        "Sitio institucional con portal de pago de facturas, backend de administración completo y una plataforma de gestión de proveedores asistida por IA.",
-      tags: ["Portal de pagos", "Backend admin", "IA", "Institucional"],
+        "Entrenamientos, asistencia, cuotas y chat del equipo en un solo lugar. El entrenador deja la planilla y las cuotas se cobran automático por Mercado Pago.",
+      tags: ["Running", "Cobro automático", "Asistencia", "Chat"],
     },
     {
-      client: "Dindorf",
-      url: "https://dindorf.com.ar/",
-      category: "Plataforma de venta de autos",
+      client: "Gymnia",
+      url: "https://gymnia.online",
+      image: "/projects/gymnia.jpg",
+      category: "SaaS de gestión para gimnasios",
       description:
-        "Plataforma de venta de vehículos con backend de gestión para administrar catálogo, stock y operaciones.",
-      tags: ["Automotriz", "Catálogo", "Backend de gestión"],
+        "Gestión de socios y planes, check-in con QR, rutinas y app para los alumnos. Cobra la cuota automático en pesos y marca la mora sola.",
+      tags: ["Gimnasios", "Check-in QR", "Socios y planes", "Rutinas"],
+    },
+    {
+      client: "Gestalud",
+      url: "https://gestalud.online",
+      image: "/projects/gestalud.jpg",
+      category: "SaaS de gestión para salud",
+      description:
+        "Agenda online, historia clínica, caja y cobro con Mercado Pago para consultorios y centros de salud. Multiprofesional, con recordatorios por WhatsApp que bajan el ausentismo.",
+      tags: ["Salud", "Agenda online", "Historia clínica", "WhatsApp"],
     },
     {
       client: "LookApp",
-      url: "https://lookapp-v2-deploy.vercel.app/",
-      category: "Gestión de fast food + delivery",
+      url: "https://lookapp.online",
+      image: "/projects/lookapp.jpg",
+      category: "SaaS de pedidos para gastronomía",
       description:
-        "Sistema integral para fast food: gestión completa del local y administración de delivery en tiempo real.",
-      tags: ["Fast food", "Delivery", "Gestión integral"],
-    },
-    {
-      client: "Consultorio Web",
-      url: "https://consultorio-web-production-ed74.up.railway.app/",
-      category: "Gestión de consultorios + portal de pacientes",
-      description:
-        "Gestión integral de consultorios y profesionales con portal de pacientes para turnos y seguimiento.",
-      tags: ["Salud", "Turnos", "Portal de pacientes"],
+        "Pedidos autogestionados para bares y restaurantes: menú con QR, cocina en vivo, beeper digital y cobros con el Mercado Pago del propio local. Alta en minutos, sin instalar nada.",
+      tags: ["Gastronomía", "Menú QR", "Cocina en vivo", "Beeper"],
     },
   ] as Project[],
 };
