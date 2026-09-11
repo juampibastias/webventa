@@ -277,11 +277,29 @@ export type Project = {
 };
 
 export const projects = {
-  title: "Plataformas propias, en producción",
+  title: "Proyectos reales, en producción",
   subtitle:
-    "Productos SaaS que diseñé, desarrollé y opero de punta a punta. Todos cobrando en pesos con Mercado Pago.",
+    "Plataformas que diseñé y desarrollé de punta a punta: trabajos a medida para clientes y productos propios.",
   cta: "Ver plataforma",
   items: [
+    {
+      client: "Cooperativa Popular",
+      url: "https://www.cooperativapopular.com.ar/",
+      image: "/projects/cooperativa-popular.jpg",
+      category: "Web institucional + Portal de pagos + IA",
+      description:
+        "Sitio institucional con portal de pago de facturas, backend de administración completo y una plataforma de gestión de proveedores asistida por IA.",
+      tags: ["Portal de pagos", "Backend admin", "IA", "Institucional"],
+    },
+    {
+      client: "Dindorf",
+      url: "https://dindorf.com.ar/",
+      image: "/projects/dindorf.jpg",
+      category: "Plataforma de venta de autos",
+      description:
+        "Plataforma de venta de vehículos con backend de gestión para administrar catálogo, stock y operaciones.",
+      tags: ["Automotriz", "Catálogo", "Backend de gestión"],
+    },
     {
       client: "TeamApp",
       url: "https://teamapp.online",
