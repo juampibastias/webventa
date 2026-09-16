@@ -306,8 +306,8 @@ export const projects = {
       image: "/projects/trama.jpg",
       category: "SaaS de gestión de proveedores con IA",
       description:
-        "Del pedido al pago en un expediente auditable: compulsas de precios con sobre cerrado, notas de pedido, facturas con matching, órdenes de pago con retenciones automáticas y legajos digitales. Subís un PDF y la IA lo clasifica, extrae los datos y crea los registros sola.",
-      tags: ["Compras", "IA documental", "Órdenes de pago", "Portal de proveedores"],
+        "Del pedido al pago en un expediente auditable: compulsas de precios, notas de pedido, facturas con matching, órdenes de pago con retenciones automáticas y legajos digitales. Subís un PDF y la IA lo clasifica, extrae los datos y crea los registros sola. Y trae APIs listas para integrarlo con el ERP o el sistema de gestión que ya uses, sin rehacer tus procesos.",
+      tags: ["Compras", "IA documental", "Integrable por API", "Órdenes de pago", "Portal de proveedores"],
     },
     {
       client: "TeamApp",
