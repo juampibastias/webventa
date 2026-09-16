@@ -301,6 +301,15 @@ export const projects = {
       tags: ["Automotriz", "Catálogo", "Backend de gestión"],
     },
     {
+      client: "Trama",
+      url: "https://trama.jpbt.online",
+      image: "/projects/trama.jpg",
+      category: "SaaS de gestión de proveedores con IA",
+      description:
+        "Del pedido al pago en un expediente auditable: compulsas de precios con sobre cerrado, notas de pedido, facturas con matching, órdenes de pago con retenciones automáticas y legajos digitales. Subís un PDF y la IA lo clasifica, extrae los datos y crea los registros sola.",
+      tags: ["Compras", "IA documental", "Órdenes de pago", "Portal de proveedores"],
+    },
+    {
       client: "TeamApp",
       url: "https://teamapp.online",
       image: "/projects/teamapp.jpg",
